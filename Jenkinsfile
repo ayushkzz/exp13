@@ -17,10 +17,10 @@ pipeline {
                 bat 'mvn clean test'
             }
         }
-        post {
-            always {
-                junit '**/target/surefire-report/*.xml'
-            }
+    }
+    post {
+        always {
+            junit '**/target/surefire-report/*.xml'
         }
     }
 }
