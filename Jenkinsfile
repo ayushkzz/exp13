@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    tools {
+        java 'JDK22'
+        maven 'Maven3'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build & Test') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
+        post {
+            always {
+                junit '**/target/surefire-report/*.xml'
+            }
+        }
+    }
+}
